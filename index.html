@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPE 海外再生能源專案管理 SOP v2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFDF7;
+  --bg2: #F5F0E8;
+  --black: #1A1A1A;
+  --border: 3px solid #1A1A1A;
+  --shadow: 4px 4px 0px #1A1A1A;
+  --shadow-lg: 6px 6px 0px #1A1A1A;
+  --s1: #00C853; --s1-light: #E8F5E9;
+  --s2: #2979FF; --s2-light: #E3F0FF;
+  --s3: #FF6D00; --s3-light: #FFF3E0;
+  --s4: #D50000; --s4-light: #FFEBEE;
+  --s5: #6200EA; --s5-light: #EDE7F6;
+  --gov: #FF6F00; --gov-light: #FFF8E1;
+  --nav-w: 240px;
+  --yellow: #FFD600;
+  --pink: #FF4081;
+  --teal: #00BCD4;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--black);
+  display:flex;
+  min-height:100vh;
+}
+
+/* ══ SIDEBAR ══ */
+.sidebar{
+  width:var(--nav-w);
+  background:#1A1A1A;
+  color:#fff;
+  position:fixed;
+  top:0;left:0;bottom:0;
+  overflow-y:auto;
+  z-index:100;
+  display:flex;
+  flex-direction:column;
+}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:#444;border-radius:2px;}
+
+.sidebar-logo{
+  padding:24px 20px;
+  border-bottom:2px solid #333;
+}
+.sidebar-logo .co{
+  font-family:'Syne',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--yellow);
+  margin-bottom:6px;
+}
+.sidebar-logo .title{
+  font-family:'Syne',sans-serif;
+  font-size:13px;
+  font-weight:700;
+  line-height:1.4;
+  color:#fff;
+}
+.sidebar-logo .ver{font-size:11px;color:#666;margin-top:4px;}
+
+.nav-sec{padding:12px 0 4px;}
+.nav-sec-title{
+  font-size:9px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:#555;padding:0 16px 6px;
+}
+.nav-a{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 16px;
+  text-decoration:none;color:#aaa;
+  font-size:12px;font-weight:500;
+  transition:all .15s;
+  position:relative;
+}
+.nav-a:hover{background:#222;color:#fff;}
+.nav-a.active{background:#222;color:#fff;}
+.nav-a.active::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;border-radius:0 2px 2px 0;
+}
+.nav-a.s1.active::before{background:var(--s1);}
+.nav-a.s2.active::before{background:var(--s2);}
+.nav-a.s3.active::before{background:var(--s3);}
+.nav-a.s4.active::before{background:var(--s4);}
+.nav-a.s5.active::before{background:var(--s5);}
+.nav-a.gov.active::before{background:var(--gov);}
+
+.nav-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.nav-sub{padding-left:32px;font-size:11px;color:#666;}
+.nav-sub:hover{color:#aaa;}
+
+.sidebar-footer{
+  margin-top:auto;padding:16px;
+  border-top:1px solid #333;
+  font-size:10px;color:#555;line-height:1.6;
+}
+
+/* ══ MAIN ══ */
+.main{margin-left:var(--nav-w);flex:1;}
+
+/* ══ HERO ══ */
+.hero{
+  background:#1A1A1A;
+  color:#fff;
+  padding:64px 56px;
+  position:relative;
+  overflow:hidden;
+  border-bottom:var(--border);
+}
+.hero-geo{
+  position:absolute;top:-40px;right:-40px;
+  width:300px;height:300px;
+  border-radius:50%;
+  background:var(--yellow);
+  opacity:.12;
+}
+.hero-geo2{
+  position:absolute;bottom:-60px;left:40%;
+  width:200px;height:200px;
+  background:var(--s1);
+  opacity:.1;
+  transform:rotate(45deg);
+}
+.hero-tag{
+  display:inline-block;
+  font-family:'Syne',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  background:var(--yellow);color:#1A1A1A;
+  padding:4px 12px;border-radius:2px;
+  margin-bottom:20px;
+}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(32px,5vw,56px);
+  font-weight:800;line-height:1.1;
+  margin-bottom:16px;
+}
+.hero h1 span{color:var(--yellow);}
+.hero-sub{font-size:15px;color:#aaa;max-width:480px;line-height:1.7;margin-bottom:40px;}
+
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:40px;}
+.meta-item{display:flex;flex-direction:column;gap:3px;}
+.meta-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#666;}
+.meta-value{font-size:13px;font-weight:600;color:#fff;}
+
+/* stage pills */
+.stage-trail{display:flex;gap:8px;flex-wrap:wrap;}
+.s-pill{
+  font-family:'Syne',sans-serif;
+  font-size:11px;font-weight:700;
+  padding:6px 14px;
+  border:2px solid;
+  border-radius:2px;
+  display:flex;align-items:center;gap:6px;
+}
+.s-pill.s1{background:var(--s1);color:#fff;border-color:var(--s1);}
+.s-pill.s2{background:var(--s2);color:#fff;border-color:var(--s2);}
+.s-pill.s3{background:var(--s3);color:#fff;border-color:var(--s3);}
+.s-pill.s4{background:var(--s4);color:#fff;border-color:var(--s4);}
+.s-pill.s5{background:var(--s5);color:#fff;border-color:var(--s5);}
+.s-pill-arrow{color:#555;font-size:16px;}
+
+/* ══ SECTION ══ */
+.sec{padding:56px;border-bottom:var(--border);}
+.sec-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:40px;}
+.sec-icon{
+  width:52px;height:52px;
+  border:var(--border);
+  border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+  flex-shrink:0;
+  box-shadow:var(--shadow);
+}
+.sec-label{
+  font-family:'Syne',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.sec-title{
+  font-family:'Syne',sans-serif;
+  font-size:28px;font-weight:800;
+  color:var(--black);line-height:1.2;
+}
+.sec-desc{font-size:14px;color:#555;margin-top:6px;line-height:1.6;}
+
+/* ══ GRADE CARDS ══ */
+.grade-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px;}
+.grade-card{
+  border:var(--border);
+  border-radius:4px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  background:#fff;
+  transition:transform .2s,box-shadow .2s;
+}
+.grade-card:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-lg);}
+.grade-top{
+  height:6px;
+  position:absolute;top:0;left:0;right:0;
+}
+.grade-badge{
+  font-family:'Syne',sans-serif;
+  font-size:11px;font-weight:800;
+  letter-spacing:1px;
+  display:inline-block;
+  padding:3px 10px;
+  border:2px solid var(--black);
+  border-radius:2px;
+  margin-bottom:10px;
+  margin-top:8px;
+}
+.grade-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;}
+.grade-desc{font-size:12px;color:#555;line-height:1.5;margin-bottom:12px;}
+.grade-stages{display:flex;gap:4px;flex-wrap:wrap;}
+.g-pill{
+  font-size:10px;font-weight:600;
+  padding:2px 8px;
+  border:1.5px solid var(--black);
+  border-radius:2px;
+  background:var(--bg);
+}
+
+/* ══ CALLOUT ══ */
+.callout{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:14px 18px;
+  border:2px solid var(--black);
+  border-radius:4px;
+  font-size:13px;line-height:1.6;
+  margin:16px 0;
+  box-shadow:var(--shadow);
+}
+.callout-icon{font-size:18px;flex-shrink:0;}
+.callout.info{background:var(--s2-light);}
+.callout.warn{background:var(--gov-light);}
+.callout.ok{background:var(--s1-light);}
+.callout.danger{background:var(--s4-light);}
+
+/* ══ FLOWCHART ══ */
+.flow-wrap{
+  background:#fff;
+  border:var(--border);
+  border-radius:4px;
+  padding:24px;
+  margin:16px 0;
+  box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.flow-title{
+  font-family:'Syne',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:#888;margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.flow-title::after{content:'';flex:1;height:2px;background:#eee;}
+
+/* SVG flowcharts */
+svg text{font-family:'DM Sans',sans-serif;}
+svg .node-rect{stroke:#1A1A1A;stroke-width:2.5;}
+svg .node-text{fill:#1A1A1A;font-weight:600;font-size:12px;}
+svg .node-sub{fill:#555;font-size:10px;}
+svg .arrow{stroke:#1A1A1A;stroke-width:2;fill:none;marker-end:url(#arr);}
+svg .arrow-dashed{stroke:#999;stroke-width:2;stroke-dasharray:5,3;fill:none;marker-end:url(#arr-gray);}
+svg .lane-label{fill:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;letter-spacing:1px;}
+svg .lane-bg{}
+svg .decision{stroke:#1A1A1A;stroke-width:2.5;fill:#fff;}
+
+/* ══ TABLE ══ */
+.sop-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0;}
+.sop-table th{
+  background:#1A1A1A;color:#fff;
+  font-family:'Syne',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:10px 14px;text-align:left;
+}
+.sop-table td{
+  padding:10px 14px;
+  border-bottom:1.5px solid #eee;
+  vertical-align:top;line-height:1.5;
+  background:#fff;
+}
+.sop-table tr:hover td{background:#fafafa;}
+
+/* ══ STAGE BLOCK ══ */
+.stage-block{
+  border:var(--border);
+  border-radius:4px;
+  overflow:hidden;
+  margin-bottom:32px;
+  box-shadow:var(--shadow-lg);
+}
+.stage-head{
+  padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:var(--border);
+}
+.stage-head-left{display:flex;align-items:center;gap:12px;}
+.stage-num{
+  font-family:'Syne',sans-serif;
+  font-size:10px;font-weight:800;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 10px;
+  border:2px solid var(--black);
+  border-radius:2px;
+}
+.stage-htitle{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;}
+.stage-hrange{font-size:12px;color:#666;margin-top:2px;}
+.stage-tag{
+  font-size:11px;font-weight:600;
+  padding:3px 10px;
+  border:2px solid var(--black);
+  border-radius:2px;
+  background:var(--bg);
+  white-space:nowrap;
+}
+.stage-body{padding:24px;}
+
+/* output / gate */
+.out-gate{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
+@media(max-width:900px){.out-gate{grid-template-columns:1fr;}}
+.out-box,.gate-box{
+  border:2px solid var(--black);
+  border-radius:4px;padding:14px;
+  background:#fff;
+}
+.box-head{
+  font-family:'Syne',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;
+}
+.o-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:500;
+  padding:4px 10px;margin:3px;
+  border:2px solid var(--s2);
+  border-radius:2px;background:var(--s2-light);
+  color:var(--s2);
+}
+.g-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:500;
+  padding:4px 10px;margin:3px;
+  border:2px solid var(--s1);
+  border-radius:2px;background:var(--s1-light);
+  color:#1B5E20;
+}
+
+/* sub-title */
+.sub-h{
+  font-family:'Syne',sans-serif;
+  font-size:12px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  color:#888;margin:20px 0 10px;
+  display:flex;align-items:center;gap:8px;
+}
+.sub-h::after{content:'';flex:1;height:2px;background:#eee;}
+
+/* ══ GOV CARDS ══ */
+.gov-card{
+  border:var(--border);border-radius:4px;
+  padding:28px;margin-bottom:24px;
+  box-shadow:var(--shadow-lg);
+  background:#fff;
+}
+.gov-card-head{
+  display:flex;align-items:center;gap:12px;
+  padding-bottom:16px;margin-bottom:20px;
+  border-bottom:2px solid #eee;
+}
+.gov-badge{
+  font-family:'Syne',sans-serif;
+  font-size:10px;font-weight:800;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 12px;
+  background:#1A1A1A;color:var(--yellow);
+  border-radius:2px;
+}
+.gov-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;}
+
+/* report template */
+.report-tpl{
+  border:var(--border);border-radius:4px;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.report-head{
+  background:#1A1A1A;color:var(--yellow);
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:1px;padding:10px 18px;
+}
+.report-row{
+  display:grid;grid-template-columns:140px 1fr;
+  gap:12px;padding:10px 18px;
+  border-bottom:1.5px solid #eee;
+  font-size:13px;
+  background:#fff;
+}
+.report-row:last-child{border-bottom:none;}
+.r-label{color:#888;font-weight:600;font-size:12px;}
+.r-val{color:#555;font-style:italic;}
+
+/* abbr grid */
+.abbr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
+.abbr-item{
+  background:#fff;border:2px solid #ddd;
+  border-radius:4px;padding:10px 14px;
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;transition:all .15s;
+}
+.abbr-item:hover{border-color:var(--black);box-shadow:var(--shadow);}
+.abbr-code{
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
+  color:var(--s2);min-width:72px;flex-shrink:0;
+}
+.abbr-name{color:#444;line-height:1.4;}
+
+/* footer */
+.doc-footer{
+  padding:32px 56px;
+  background:#1A1A1A;color:#666;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;
+}
+
+/* fade in */
+.fi{opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s;}
+.fi.vis{opacity:1;transform:none;}
+
+/* two-col */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+@media(max-width:900px){.two-col{grid-template-columns:1fr;}}
+
+/* color accents per section */
+.s1-sec .sec-label,.s1-sec .sec-icon{color:var(--s1);}
+.s1-sec .sec-icon{background:var(--s1-light);border-color:var(--s1);}
+.s2-sec .sec-label,.s2-sec .sec-icon{color:var(--s2);}
+.s2-sec .sec-icon{background:var(--s2-light);border-color:var(--s2);}
+.s3-sec .sec-label,.s3-sec .sec-icon{color:var(--s3);}
+.s3-sec .sec-icon{background:var(--s3-light);border-color:var(--s3);}
+.s4-sec .sec-label,.s4-sec .sec-icon{color:var(--s4);}
+.s4-sec .sec-icon{background:var(--s4-light);border-color:var(--s4);}
+.s5-sec .sec-label,.s5-sec .sec-icon{color:var(--s5);}
+.s5-sec .sec-icon{background:var(--s5-light);border-color:var(--s5);}
+.gov-sec .sec-label,.gov-sec .sec-icon{color:var(--gov);}
+.gov-sec .sec-icon{background:var(--gov-light);border-color:var(--gov);}
+
+@media print{
+  .sidebar{display:none;}
+  .main{margin-left:0;}
+  .stage-block,.gov-card{break-inside:avoid;}
+}
+@media(max-width:768px){
+  .sidebar{display:none;}
+  .main{margin-left:0;}
+  .sec,.hero{padding:32px 20px;}
+  .doc-footer{flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="co">SPE 日益智慧能源</div>
+    <div class="title">海外再生能源<br>專案管理 SOP</div>
+    <div class="ver">v2.0 ｜ 2026.05 ｜ 機密</div>
+  </div>
+  <div class="nav-sec">
+    <div class="nav-sec-title">文件總覽</div>
+    <a class="nav-a" href="#cover"><span class="nav-dot" style="background:#FFD600"></span>封面與目的</a>
+    <a class="nav-a" href="#grade"><span class="nav-dot" style="background:#00C853"></span>案件分級</a>
+    <a class="nav-a" href="#abbr"><span class="nav-dot" style="background:#aaa"></span>縮寫對照表</a>
+  </div>
+  <div class="nav-sec">
+    <div class="nav-sec-title">開發流程</div>
+    <a class="nav-a s1" href="#s1"><span class="nav-dot" style="background:#00C853"></span>S1｜商機評估</a>
+    <a class="nav-a nav-sub" href="#s1-flow">泳道流程圖</a>
+    <a class="nav-a nav-sub" href="#s1-gate">產出 & Gate</a>
+    <a class="nav-a s2" href="#s2"><span class="nav-dot" style="background:#2979FF"></span>S2｜開發規劃</a>
+    <a class="nav-a nav-sub" href="#s2-flow">流程圖</a>
+    <a class="nav-a s3" href="#s3"><span class="nav-dot" style="background:#FF6D00"></span>S3｜合約簽署</a>
+    <a class="nav-a nav-sub" href="#s3-flow">流程圖</a>
+    <a class="nav-a s4" href="#s4"><span class="nav-dot" style="background:#D50000"></span>S4｜工程執行</a>
+    <a class="nav-a nav-sub" href="#s4-flow">雙線並行圖</a>
+    <a class="nav-a s5" href="#s5"><span class="nav-dot" style="background:#6200EA"></span>S5｜維運管理</a>
+    <a class="nav-a nav-sub" href="#s5-flow">監控分支圖</a>
+  </div>
+  <div class="nav-sec">
+    <div class="nav-sec-title">治理機制</div>
+    <a class="nav-a gov" href="#gov-a"><span class="nav-dot" style="background:#FF6F00"></span>A｜週期回報</a>
+    <a class="nav-a gov" href="#gov-b"><span class="nav-dot" style="background:#FF6F00"></span>B｜Stage 交接包</a>
+    <a class="nav-a gov" href="#gov-c"><span class="nav-dot" style="background:#FF6F00"></span>C｜變更控制</a>
+  </div>
+  <div class="sidebar-footer">僅供內部使用<br>海外課・財會部・法務室<br>工程技術部・設計採購部</div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="cover">
+  <div class="hero-geo"></div>
+  <div class="hero-geo2"></div>
+  <div class="hero-tag">Standard Operating Procedure</div>
+  <h1>海外再生能源<br><span>專案管理 SOP</span></h1>
+  <p class="hero-sub">從第一次接到消息，到商業運轉後維運管理的完整標準作業程序。不管誰來接手，都能照著走。</p>
+  <div class="hero-meta">
+    <div class="meta-item"><span class="meta-label">版本</span><span class="meta-value">v2.0</span></div>
+    <div class="meta-item"><span class="meta-label">發布日期</span><span class="meta-value">2026 年 5 月</span></div>
+    <div class="meta-item"><span class="meta-label">主責部門</span><span class="meta-value">海外課</span></div>
+    <div class="meta-item"><span class="meta-label">適用地區</span><span class="meta-value">越南・泰國・日本</span></div>
+    <div class="meta-item"><span class="meta-label">機密等級</span><span class="meta-value" style="color:#ff5252">🔒 內部機密</span></div>
+  </div>
+  <div class="stage-trail">
+    <span class="s-pill s1">S1 商機評估</span>
+    <span class="s-pill-arrow">→</span>
+    <span class="s-pill s2">S2 開發規劃</span>
+    <span class="s-pill-arrow">→</span>
+    <span class="s-pill s3">S3 合約簽署</span>
+    <span class="s-pill-arrow">→</span>
+    <span class="s-pill s4">S4 工程執行</span>
+    <span class="s-pill-arrow">→</span>
+    <span class="s-pill s5">S5 維運管理</span>
+  </div>
+  <div class="callout info" style="margin-top:32px;background:rgba(41,121,255,.15);border-color:rgba(41,121,255,.5);">
+    <span class="callout-icon">📌</span>
+    <div style="color:#fff"><strong style="color:var(--yellow)">本文件目的</strong><br>
+    建立標準化海外再生能源專案管理機制，確保所有案件在整個生命週期中均有明確的流程、產出、責任人與交接標準，解決「沒人知道案件在哪一步」、「交接靠記憶」、「每次都要重新想」、「歷程記錄分散」四大痛點。</div>
+  </div>
+</section>
+
+<!-- ══ 案件分級 ══ -->
+<section class="sec" id="grade">
+  <div class="sec-header">
+    <div class="sec-icon" style="background:#E8F5E9;border-color:#00C853;">📊</div>
+    <div>
+      <div class="sec-label" style="color:#00C853">案件分類</div>
+      <h2 class="sec-title">案件分級表</h2>
+      <p class="sec-desc">所有海外案件進入 Stage 1 後，依以下分級決定需要走哪些 Stage。</p>
+    </div>
+  </div>
+  <div class="grade-grid fi">
+    <div class="grade-card">
+      <div class="grade-top" style="background:#00C853"></div>
+      <div class="grade-badge" style="background:#E8F5E9;color:#1B5E20">L1-A</div>
+      <div class="grade-name">SPE 投資型</div>
+      <div class="grade-desc">SPE 自行出資、建置、持有資產，透過 DPPA（直接購電協議）長期收取電費。</div>
+      <div class="grade-stages">
+        <span class="g-pill" style="background:#E8F5E9;border-color:#00C853;color:#1B5E20">S1</span>
+        <span class="g-pill" style="background:#FFF3E0;border-color:#FF6D00;color:#E65100">S3</span>
+        <span class="g-pill" style="background:#FFEBEE;border-color:#D50000;color:#B71C1C">S4</span>
+        <span class="g-pill" style="background:#EDE7F6;border-color:#6200EA;color:#4527A0">S5</span>
+      </div>
+    </div>
+    <div class="grade-card">
+      <div class="grade-top" style="background:#2979FF"></div>
+      <div class="grade-badge" style="background:#E3F0FF;color:#0D47A1">L1-B</div>
+      <div class="grade-name">EPC（工程採購施工合約）承攬型</div>
+      <div class="grade-desc">業主自行出資，SPE 純施工交屋，資產歸業主所有。S5 視業主是否另外委託而定。</div>
+      <div class="grade-stages">
+        <span class="g-pill" style="background:#E8F5E9;border-color:#00C853;color:#1B5E20">S1</span>
+        <span class="g-pill" style="background:#FFF3E0;border-color:#FF6D00;color:#E65100">S3</span>
+        <span class="g-pill" style="background:#FFEBEE;border-color:#D50000;color:#B71C1C">S4</span>
+        <span class="g-pill" style="background:#EDE7F6;border-color:#6200EA;color:#4527A0">S5*</span>
+      </div>
+    </div>
+    <div class="grade-card">
+      <div class="grade-top" style="background:#FF6D00"></div>
+      <div class="grade-badge" style="background:#FFF3E0;color:#E65100">L2</div>
+      <div class="grade-name">開發型</div>
+      <div class="grade-desc">地面型開發、FIT（躉購電價制度）收購或 BESS（電池儲能系統）工業區案件，需複雜開發流程。</div>
+      <div class="grade-stages">
+        <span class="g-pill" style="background:#E8F5E9;border-color:#00C853;color:#1B5E20">S1</span>
+        <span class="g-pill" style="background:#E3F0FF;border-color:#2979FF;color:#0D47A1">S2</span>
+        <span class="g-pill" style="background:#FFF3E0;border-color:#FF6D00;color:#E65100">S3</span>
+        <span class="g-pill" style="background:#FFEBEE;border-color:#D50000;color:#B71C1C">S4</span>
+        <span class="g-pill" style="background:#EDE7F6;border-color:#6200EA;color:#4527A0">S5</span>
+      </div>
+    </div>
+    <div class="grade-card">
+      <div class="grade-top" style="background:#D50000"></div>
+      <div class="grade-badge" style="background:#FFEBEE;color:#B71C1C">L3</div>
+      <div class="grade-name">收購型</div>
+      <div class="grade-desc">涉及股權交易、DD（盡職調查）完整執行、SPV（特殊目的公司）結構設計的收購或平台型案件。</div>
+      <div class="grade-stages">
+        <span class="g-pill" style="background:#E8F5E9;border-color:#00C853;color:#1B5E20">S1</span>
+        <span class="g-pill" style="background:#E3F0FF;border-color:#2979FF;color:#0D47A1">S2+DD</span>
+        <span class="g-pill" style="background:#FFF3E0;border-color:#FF6D00;color:#E65100">S3</span>
+        <span class="g-pill" style="background:#FFEBEE;border-color:#D50000;color:#B71C1C">S4</span>
+        <span class="g-pill" style="background:#EDE7F6;border-color:#6200EA;color:#4527A0">S5</span>
+      </div>
+    </div>
+  </div>
+  <div class="callout warn fi">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>S2 開發規劃僅適用 L2 / L3 案件。</strong>L1-A 及 L1-B 於 Stage 1 投審通過後，直接進入 Stage 3。</div>
+  </div>
+</section>
+
+<!-- ══ STAGE 1 ══ -->
+<section class="sec s1-sec" id="s1">
+  <div class="sec-header">
+    <div class="sec-icon">🔍</div>
+    <div>
+      <div class="sec-label">Stage 1</div>
+      <h2 class="sec-title">商機評估</h2>
+      <p class="sec-desc">從第一次接到消息 → 老闆核准投審。適用所有案件等級。</p>
+    </div>
+  </div>
+
+  <!-- S1 泳道圖 -->
+  <div class="flow-wrap fi" id="s1-flow">
+    <div class="flow-title">📊 泳道流程圖｜Stage 1 跨部門分工</div>
+    <svg width="100%" viewBox="0 0 920 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#1A1A1A"/>
+        </marker>
+        <marker id="arr-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#D50000"/>
+        </marker>
+        <marker id="arr-gray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#999"/>
+        </marker>
+      </defs>
+      <!-- Lane backgrounds -->
+      <rect x="0" y="0" width="920" height="130" fill="#1A1A1A" class="lane-bg"/>
+      <rect x="0" y="130" width="920" height="130" fill="#E8F5E9" class="lane-bg"/>
+      <rect x="0" y="260" width="920" height="130" fill="#E3F0FF" class="lane-bg"/>
+      <rect x="0" y="390" width="920" height="130" fill="#FFF8E1" class="lane-bg"/>
+      <!-- Lane labels -->
+      <text x="10" y="55" class="lane-label" fill="#fff" font-family="'Syne',sans-serif" font-size="11" font-weight="700">海外課</text>
+      <text x="10" y="70" class="lane-label" fill="#aaa" font-family="'DM Sans',sans-serif" font-size="10">主責發起</text>
+      <text x="10" y="195" class="lane-label" fill="#1B5E20" font-family="'Syne',sans-serif" font-size="11" font-weight="700">設計採購部</text>
+      <text x="10" y="325" class="lane-label" fill="#0D47A1" font-family="'Syne',sans-serif" font-size="11" font-weight="700">財會部</text>
+      <text x="10" y="455" class="lane-label" fill="#E65100" font-family="'Syne',sans-serif" font-size="11" font-weight="700">老闆</text>
+      <!-- Lane dividers -->
+      <line x1="0" y1="130" x2="920" y2="130" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="0" y1="260" x2="920" y2="260" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="0" y1="390" x2="920" y2="390" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="90" y1="0" x2="90" y2="520" stroke="#333" stroke-width="1.5"/>
+
+      <!-- S1-1 接收消息 -->
+      <rect x="100" y="20" width="110" height="50" rx="4" fill="#FFD600" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="155" y="40" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#1A1A1A">S1-1</text>
+      <text x="155" y="56" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#1A1A1A">業主資訊收集</text>
+
+      <!-- S1-2 背景調查 -->
+      <rect x="240" y="20" width="110" height="50" rx="4" fill="#FFD600" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="295" y="40" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#1A1A1A">S1-2</text>
+      <text x="295" y="56" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#1A1A1A">業主背景調查</text>
+
+      <!-- S1-3 Go/No-Go 菱形 -->
+      <polygon points="415,45 455,20 495,45 455,70" fill="#fff" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="455" y="41" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="700" fill="#1A1A1A">Go /</text>
+      <text x="455" y="56" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="700" fill="#1A1A1A">No-Go</text>
+
+      <!-- No-Go 分支 -->
+      <rect x="530" y="20" width="110" height="50" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="585" y="40" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#D50000">結案</text>
+      <text x="585" y="56" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#D50000">or C 級候補</text>
+
+      <!-- S1-8 老闆核准 -->
+      <rect x="760" y="410" width="120" height="50" rx="4" fill="#FF6F00" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="820" y="430" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">S1-8</text>
+      <text x="820" y="448" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">老闆核准投審</text>
+
+      <!-- S1-4 技術初評 (設計採購) -->
+      <rect x="240" y="150" width="120" height="50" rx="4" fill="#00C853" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="300" y="170" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">S1-4</text>
+      <text x="300" y="186" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">技術初評</text>
+
+      <!-- S1-5 財務初評 (財會) -->
+      <rect x="400" y="280" width="120" height="50" rx="4" fill="#2979FF" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="460" y="300" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">S1-5</text>
+      <text x="460" y="316" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">財務初評</text>
+
+      <!-- S1-6 Check List (海外課) -->
+      <rect x="560" y="20" width="0" height="0"/>
+      <rect x="560" y="20" width="120" height="50" rx="4" fill="#FFD600" stroke="#1A1A1A" stroke-width="2.5" x="600" y="20"/>
+
+      <!-- S1-6 彙整 Check List -->
+      <rect x="580" y="20" width="120" height="50" rx="4" fill="#FFD600" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="640" y="40" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#1A1A1A">S1-6</text>
+      <text x="640" y="56" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#1A1A1A">彙整 Check List</text>
+
+      <!-- S1-7 初評報告 -->
+      <rect x="720" y="20" width="120" height="50" rx="4" fill="#FFD600" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="780" y="40" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#1A1A1A">S1-7</text>
+      <text x="780" y="56" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#1A1A1A">初評報告 + IRR</text>
+
+      <!-- Arrows 海外課 -->
+      <line x1="210" y1="45" x2="238" y2="45" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="350" y1="45" x2="413" y2="45" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="497" y1="45" x2="528" y2="45" stroke="#D50000" stroke-width="2" marker-end="url(#arr-red)"/>
+
+      <!-- Go 往下到設計採購 -->
+      <line x1="455" y1="70" x2="455" y2="100" stroke="#1A1A1A" stroke-width="2"/>
+      <text x="460" y="92" font-family="'DM Sans',sans-serif" font-size="10" fill="#1A1A1A" font-weight="600">Go ↓</text>
+      <line x1="300" y1="100" x2="300" y2="148" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="455" y1="100" x2="300" y2="100" stroke="#1A1A1A" stroke-width="2"/>
+
+      <!-- 設計採購 → 財會 -->
+      <line x1="360" y1="175" x2="398" y2="305" stroke="#1A1A1A" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+
+      <!-- 財會 → 彙整 Check List (跨lane) -->
+      <line x1="460" y1="330" x2="460" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="460" y1="370" x2="640" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="640" y1="370" x2="640" y2="72" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr)"/>
+
+      <!-- S1-6 → S1-7 -->
+      <line x1="700" y1="45" x2="718" y2="45" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr)"/>
+
+      <!-- S1-7 → 老闆 (往下) -->
+      <line x1="780" y1="70" x2="780" y2="410" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="780" y1="410" x2="758" y2="435" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr)"/>
+
+      <!-- 老闆核准後 Gate 標示 -->
+      <rect x="850" y="415" width="58" height="30" rx="4" fill="#00C853" stroke="#1A1A1A" stroke-width="2"/>
+      <text x="879" y="434" text-anchor="middle" font-family="'Syne',sans-serif" font-size="10" font-weight="700" fill="#fff">GATE ✓</text>
+    </svg>
+  </div>
+
+  <!-- S1 Gate -->
+  <div id="s1-gate" class="fi">
+    <div class="out-gate">
+      <div class="out-box">
+        <div class="box-head" style="color:#2979FF">📦 強制產出</div>
+        <span class="o-tag">📄 初評報告（Word）</span>
+        <span class="o-tag">📊 IRR（內部報酬率）試算 Excel</span>
+        <span class="o-tag">📋 投審 Check List</span>
+        <span class="o-tag">✅ 老闆核准紀錄</span>
+        <div class="callout info" style="margin-top:12px;font-size:12px">
+          <span class="callout-icon" style="font-size:14px">ℹ️</span>
+          <div>Check List 跨部門會簽<strong>僅適用 L2 / L3</strong>，L1-A / L1-B 不需要。</div>
+        </div>
+      </div>
+      <div class="gate-box">
+        <div class="box-head" style="color:#00C853">🚀 Gate 條件（全部達標才能進下一 Stage）</div>
+        <span class="g-tag">IRR（內部報酬率）≥ 12%</span>
+        <span class="g-tag">DSCR（債務償還覆蓋率）≥ 1.1x</span>
+        <span class="g-tag">PR（系統效能比）≥ 80%</span>
+        <span class="g-tag">PPA（購電協議）意願 ≥ 15 年</span>
+        <span class="g-tag">業主信用非 C 級</span>
+        <span class="g-tag">老闆核准</span>
+        <div class="sub-h" style="margin-top:16px">結案機制</div>
+        <table class="sop-table">
+          <thead><tr><th>狀況</th><th>處理</th><th>後續</th></tr></thead>
+          <tbody>
+            <tr><td>❌ 明確 Decline</td><td>記錄原因 → 正式結案</td><td>歸檔</td></tr>
+            <tr><td>⏸️ 條件不足</td><td>打入 C 級候補池</td><td>每季複查</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAGE 2 ══ -->
+<section class="sec s2-sec" id="s2">
+  <div class="sec-header">
+    <div class="sec-icon">📋</div>
+    <div>
+      <div class="sec-label">Stage 2</div>
+      <h2 class="sec-title">開發規劃</h2>
+      <p class="sec-desc">投審通過 → LOI（意向書）/ MOU（備忘錄）簽署。<strong>僅適用 L2 / L3 案件。</strong></p>
+    </div>
+  </div>
+
+  <div class="callout warn fi">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>LOI（意向書）/ MOU（備忘錄）彈性簽署原則：</strong>若業主要求獨家期（Exclusivity），應於 Stage 1 投審通過後立即啟動，最晚於本 Stage 結束前完成。</div>
+  </div>
+
+  <!-- S2 直向流程圖 + 分支 -->
+  <div class="flow-wrap fi" id="s2-flow">
+    <div class="flow-title">📊 直向流程圖｜Stage 2 含 LOI 彈性分支</div>
+    <svg width="100%" viewBox="0 0 860 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#1A1A1A"/>
+        </marker>
+        <marker id="arr2b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#2979FF"/>
+        </marker>
+      </defs>
+      <!-- 主流程 垂直 -->
+      <!-- S2-1 LDD -->
+      <rect x="60" y="20" width="150" height="52" rx="4" fill="#2979FF" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="135" y="40" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">S2-1</text>
+      <text x="135" y="56" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">發起 LDD 委託</text>
+      <!-- 箭頭右 -->
+      <line x1="210" y1="46" x2="248" y2="46" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <!-- 當地律師 -->
+      <rect x="250" y="28" width="110" height="36" rx="4" fill="#E3F0FF" stroke="#2979FF" stroke-width="2"/>
+      <text x="305" y="44" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#0D47A1">→ 當地律師執行</text>
+      <text x="305" y="57" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#2979FF">法規/土地/外資</text>
+
+      <!-- S2-2 FDD -->
+      <rect x="60" y="110" width="150" height="52" rx="4" fill="#2979FF" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="135" y="130" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">S2-2</text>
+      <text x="135" y="146" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">發起 FDD 委託</text>
+      <line x1="135" y1="72" x2="135" y2="108" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="210" y1="136" x2="248" y2="136" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <rect x="250" y="118" width="110" height="36" rx="4" fill="#E3F0FF" stroke="#2979FF" stroke-width="2"/>
+      <text x="305" y="134" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#0D47A1">→ 當地會計師</text>
+      <text x="305" y="147" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#2979FF">財務/稅務</text>
+
+      <!-- S2-3 融資（同步） -->
+      <rect x="60" y="200" width="150" height="52" rx="4" fill="#00BCD4" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="135" y="220" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">S2-3</text>
+      <text x="135" y="236" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">融資洽詢（同步）</text>
+      <line x1="135" y1="162" x2="135" y2="198" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="210" y1="226" x2="248" y2="226" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <rect x="250" y="208" width="110" height="36" rx="4" fill="#E0F7FA" stroke="#00BCD4" stroke-width="2"/>
+      <text x="305" y="224" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#006064">→ 財會部</text>
+      <text x="305" y="237" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#00BCD4">貸款/利率/擔保</text>
+
+      <!-- S2-4 PPA架構 -->
+      <rect x="60" y="290" width="150" height="52" rx="4" fill="#2979FF" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="135" y="310" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">S2-4</text>
+      <text x="135" y="326" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">PPA 架構設計</text>
+      <line x1="135" y1="252" x2="135" y2="288" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="210" y1="316" x2="248" y2="316" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <rect x="250" y="298" width="110" height="36" rx="4" fill="#E3F0FF" stroke="#2979FF" stroke-width="2"/>
+      <text x="305" y="316" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#0D47A1">→ 法務室協助</text>
+
+      <!-- S2-5 EPC選商 -->
+      <rect x="60" y="378" width="150" height="52" rx="4" fill="#2979FF" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="135" y="398" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">S2-5</text>
+      <text x="135" y="414" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">EPC 初步選商</text>
+      <line x1="135" y1="342" x2="135" y2="376" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="210" y1="404" x2="248" y2="404" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <rect x="250" y="386" width="110" height="36" rx="4" fill="#E8F5E9" stroke="#00C853" stroke-width="2"/>
+      <text x="305" y="404" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#1B5E20">→ 設計採購部</text>
+
+      <!-- LOI 分支菱形 -->
+      <polygon points="520,200 570,170 620,200 570,230" fill="#FFD600" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="570" y="196" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="700" fill="#1A1A1A">競爭</text>
+      <text x="570" y="212" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="700" fill="#1A1A1A">案件?</text>
+
+      <!-- 是 → 早簽 LOI -->
+      <rect x="650" y="140" width="140" height="52" rx="4" fill="#FF4081" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="720" y="160" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">立即簽署 LOI</text>
+      <text x="720" y="176" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">鎖定獨家期</text>
+      <line x1="620" y1="200" x2="648" y2="166" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <text x="633" y="172" font-family="'DM Sans',sans-serif" font-size="10" fill="#D50000" font-weight="700">是</text>
+
+      <!-- 否 → 正常簽 LOI -->
+      <rect x="650" y="240" width="140" height="52" rx="4" fill="#E3F0FF" stroke="#2979FF" stroke-width="2.5"/>
+      <text x="720" y="260" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#2979FF">Stage 2 末期</text>
+      <text x="720" y="276" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#2979FF">簽署 LOI / MOU</text>
+      <line x1="620" y1="200" x2="648" y2="266" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <text x="633" y="240" font-family="'DM Sans',sans-serif" font-size="10" fill="#2979FF" font-weight="700">否</text>
+
+      <!-- 連到分支判斷的箭頭 -->
+      <line x1="370" y1="200" x2="518" y2="200" stroke="#1A1A1A" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr2)"/>
+      <text x="420" y="192" font-family="'DM Sans',sans-serif" font-size="9" fill="#888">同步評估</text>
+
+      <!-- Gate -->
+      <rect x="650" y="420" width="140" height="40" rx="4" fill="#00C853" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="720" y="444" text-anchor="middle" font-family="'Syne',sans-serif" font-size="11" font-weight="700" fill="#fff">GATE → S3 ✓</text>
+      <line x1="720" y1="292" x2="720" y2="418" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="720" y1="192" x2="720" y2="240" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr2)"/>
+    </svg>
+  </div>
+
+  <div class="out-gate fi">
+    <div class="out-box">
+      <div class="box-head" style="color:#2979FF">📦 強制產出</div>
+      <span class="o-tag">⚖️ LDD（法律盡職調查）初步報告</span>
+      <span class="o-tag">📊 FDD（財務盡職調查）初步報告</span>
+      <span class="o-tag">🏦 融資洽詢備忘錄</span>
+      <span class="o-tag">📝 LOI（意向書）/ MOU（備忘錄）正式簽署</span>
+    </div>
+    <div class="gate-box">
+      <div class="box-head" style="color:#00C853">🚀 Gate 條件</div>
+      <span class="g-tag">LDD（法律盡職調查）無重大法律瑕疵</span>
+      <span class="g-tag">土地年限對齊 PPA（購電協議）年期</span>
+      <span class="g-tag">融資可行性初步確認</span>
+      <span class="g-tag">LOI（意向書）/ MOU（備忘錄）簽署完成</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAGE 3 ══ -->
+<section class="sec s3-sec" id="s3">
+  <div class="sec-header">
+    <div class="sec-icon">⚖️</div>
+    <div>
+      <div class="sec-label">Stage 3</div>
+      <h2 class="sec-title">合約簽署</h2>
+      <p class="sec-desc">LOI（意向書）→ EPC（工程採購施工合約）合約簽署完成，準備動工。適用所有案件等級。</p>
+    </div>
+  </div>
+
+  <!-- S3 三條路徑橫向圖 -->
+  <div class="flow-wrap fi" id="s3-flow">
+    <div class="flow-title">📊 橫向流程圖｜依案件等級的三條合約路徑</div>
+    <svg width="100%" viewBox="0 0 920 380" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#1A1A1A"/>
+        </marker>
+      </defs>
+      <!-- Row labels -->
+      <rect x="0" y="0" width="80" height="380" fill="#F5F5F5" stroke="#1A1A1A" stroke-width="1.5"/>
+      <text x="40" y="80" text-anchor="middle" font-family="'Syne',sans-serif" font-size="10" font-weight="700" fill="#1B5E20">L1</text>
+      <text x="40" y="95" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#666">A / B</text>
+      <line x1="0" y1="130" x2="920" y2="130" stroke="#ddd" stroke-width="1.5"/>
+      <text x="40" y="210" text-anchor="middle" font-family="'Syne',sans-serif" font-size="10" font-weight="700" fill="#0D47A1">L2</text>
+      <line x1="0" y1="260" x2="920" y2="260" stroke="#ddd" stroke-width="1.5"/>
+      <text x="40" y="320" text-anchor="middle" font-family="'Syne',sans-serif" font-size="10" font-weight="700" fill="#B71C1C">L3</text>
+
+      <!-- L1 路徑 -->
+      <rect x="100" y="46" width="120" height="48" rx="4" fill="#FFF3E0" stroke="#FF6D00" stroke-width="2.5"/>
+      <text x="160" y="66" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#E65100">S3-2</text>
+      <text x="160" y="82" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#E65100">PPA（購電協議）合約</text>
+      <line x1="220" y1="70" x2="248" y2="70" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr3)"/>
+      <rect x="250" y="46" width="120" height="48" rx="4" fill="#FFF3E0" stroke="#FF6D00" stroke-width="2.5"/>
+      <text x="310" y="66" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#E65100">S3-3</text>
+      <text x="310" y="82" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#E65100">屋頂 / 土地租約</text>
+      <line x1="370" y1="70" x2="398" y2="70" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr3)"/>
+      <rect x="400" y="46" width="120" height="48" rx="4" fill="#FFF3E0" stroke="#FF6D00" stroke-width="2.5"/>
+      <text x="460" y="66" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#E65100">S3-5</text>
+      <text x="460" y="82" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#E65100">EPC（工程採購施工）合約</text>
+      <line x1="520" y1="70" x2="548" y2="70" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr3)"/>
+      <rect x="550" y="46" width="120" height="48" rx="4" fill="#FFF3E0" stroke="#FF6D00" stroke-width="2.5"/>
+      <text x="610" y="66" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#E65100">S3-6</text>
+      <text x="610" y="82" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#E65100">銀行 Term Sheet</text>
+      <line x1="670" y1="70" x2="698" y2="70" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr3)"/>
+      <rect x="700" y="46" width="100" height="48" rx="4" fill="#00C853" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="750" y="66" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">GATE</text>
+      <text x="750" y="82" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">→ S4 ✓</text>
+
+      <!-- L2 路徑 -->
+      <rect x="100" y="148" width="120" height="48" rx="4" fill="#E3F0FF" stroke="#2979FF" stroke-width="2.5"/>
+      <text x="160" y="168" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#0D47A1">S3-1</text>
+      <text x="160" y="184" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#0D47A1">完整 DD</text>
+      <line x1="220" y1="172" x2="248" y2="172" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr3)"/>
+      <rect x="250" y="148" width="120" height="48" rx="4" fill="#FFF3E0" stroke="#FF6D00" stroke-width="2.5"/>
+      <text x="310" y="168" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#E65100">S3-2/3</text>
+      <text x="310" y="184" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#E65100">PPA + 租約</text>
+      <line x1="370" y1="172" x2="398" y2="172" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr3)"/>
+      <rect x="400" y="148" width="120" height="48" rx="4" fill="#FFF3E0" stroke="#FF6D00" stroke-width="2.5"/>
+      <text x="460" y="168" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#E65100">S3-5/6</text>
+      <text x="460" y="184" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#E65100">EPC + 融資</text>
+      <line x1="520" y1="172" x2="698" y2="70" stroke="#1A1A1A" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr3)"/>
+
+      <!-- L3 路徑 -->
+      <rect x="100" y="276" width="120" height="48" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="160" y="296" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#B71C1C">S3-1</text>
+      <text x="160" y="312" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#B71C1C">完整 DD</text>
+      <line x1="220" y1="300" x2="248" y2="300" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr3)"/>
+      <rect x="250" y="276" width="120" height="48" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="310" y="296" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#B71C1C">S3-4</text>
+      <text x="310" y="312" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#B71C1C">SPA + SHA</text>
+      <line x1="370" y1="300" x2="398" y2="300" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr3)"/>
+      <rect x="400" y="276" width="120" height="48" rx="4" fill="#FFF3E0" stroke="#FF6D00" stroke-width="2.5"/>
+      <text x="460" y="296" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#E65100">S3-2/3/5/6</text>
+      <text x="460" y="312" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#E65100">所有合約</text>
+      <line x1="520" y1="300" x2="698" y2="90" stroke="#1A1A1A" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr3)"/>
+    </svg>
+  </div>
+
+  <div class="out-gate fi">
+    <div class="out-box">
+      <div class="box-head" style="color:#2979FF">📦 強制產出</div>
+      <span class="o-tag">📄 PPA（購電協議）正式合約</span>
+      <span class="o-tag">🏠 屋頂 / 土地租約</span>
+      <span class="o-tag">🏗️ EPC（工程採購施工）合約</span>
+      <span class="o-tag">🤝 SPA（股份買賣協議）/ SHA（股東協議）（L3）</span>
+      <span class="o-tag">🏦 銀行 Term Sheet（融資條件書）</span>
+      <span class="o-tag">🔎 DD（盡職調查）完整報告（L2/L3）</span>
+    </div>
+    <div class="gate-box">
+      <div class="box-head" style="color:#00C853">🚀 Gate 條件</div>
+      <span class="g-tag">所有合約簽署完成</span>
+      <span class="g-tag">DD（盡職調查）無重大瑕疵</span>
+      <span class="g-tag">融資 Term Sheet 確認</span>
+      <span class="g-tag">老闆最終核准動工</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAGE 4 ══ -->
+<section class="sec s4-sec" id="s4">
+  <div class="sec-header">
+    <div class="sec-icon">🏗️</div>
+    <div>
+      <div class="sec-label">Stage 4</div>
+      <h2 class="sec-title">工程執行</h2>
+      <p class="sec-desc">動工 → COD（商業運轉日）完成。海外課專案負責人主導，工程技術部駐點監工。</p>
+    </div>
+  </div>
+
+  <!-- S4 雙線並行圖 -->
+  <div class="flow-wrap fi" id="s4-flow">
+    <div class="flow-title">📊 雙線並行圖｜工程線 & 行政許可線同步推進</div>
+    <svg width="100%" viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#1A1A1A"/>
+        </marker>
+        <marker id="arr4r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#D50000"/>
+        </marker>
+      </defs>
+      <!-- Column headers -->
+      <rect x="0" y="0" width="420" height="40" fill="#D50000"/>
+      <rect x="440" y="0" width="420" height="40" fill="#555"/>
+      <text x="210" y="25" text-anchor="middle" font-family="'Syne',sans-serif" font-size="12" font-weight="700" fill="#fff">🏗️ 工程線（海外課主導）</text>
+      <text x="650" y="25" text-anchor="middle" font-family="'Syne',sans-serif" font-size="12" font-weight="700" fill="#fff">📑 行政許可線（當地 EPC 執行）</text>
+
+      <!-- 中線 -->
+      <line x1="430" y1="0" x2="430" y2="420" stroke="#1A1A1A" stroke-width="2.5"/>
+
+      <!-- 工程線節點 -->
+      <rect x="20" y="60" width="160" height="48" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="100" y="80" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#B71C1C">S4-1 確認工程甘特圖</text>
+      <text x="100" y="96" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#D50000">包商提供 → 工程技術部確認</text>
+      <line x1="100" y1="108" x2="100" y2="128" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr4)"/>
+
+      <rect x="20" y="130" width="160" height="48" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="100" y="150" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#B71C1C">S4-2 動工令發出</text>
+      <text x="100" y="166" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#D50000">海外課正式啟動</text>
+      <line x1="100" y1="178" x2="100" y2="198" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr4)"/>
+
+      <rect x="20" y="200" width="160" height="48" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="100" y="220" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#B71C1C">S4-3 PCM（資金控管）</text>
+      <text x="100" y="236" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#D50000">海外課發起，會簽工程採購</text>
+      <line x1="100" y1="248" x2="100" y2="268" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr4)"/>
+
+      <rect x="20" y="270" width="160" height="48" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="100" y="290" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#B71C1C">S4-4 施工進度監督</text>
+      <text x="100" y="306" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#D50000">週報 + 監工日誌</text>
+      <line x1="100" y1="318" x2="100" y2="338" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr4)"/>
+
+      <rect x="20" y="340" width="160" height="48" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="100" y="360" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#B71C1C">S4-5/6 驗收 + 試運轉</text>
+      <text x="100" y="376" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#D50000">工程技術部執行</text>
+
+      <!-- 許可線節點 -->
+      <rect x="460" y="60" width="160" height="48" rx="4" fill="#F5F5F5" stroke="#555" stroke-width="2.5"/>
+      <text x="540" y="80" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#333">施工許可申請</text>
+      <text x="540" y="96" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#666">公部門送件</text>
+      <line x1="540" y1="108" x2="540" y2="128" stroke="#555" stroke-width="2" marker-end="url(#arr4)"/>
+
+      <rect x="460" y="130" width="160" height="48" rx="4" fill="#F5F5F5" stroke="#555" stroke-width="2.5"/>
+      <text x="540" y="150" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#333">消防許可</text>
+      <text x="540" y="166" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#666">越南 PCCC（消防安全規範）</text>
+      <line x1="540" y1="178" x2="540" y2="198" stroke="#555" stroke-width="2" marker-end="url(#arr4)"/>
+
+      <rect x="460" y="200" width="160" height="48" rx="4" fill="#F5F5F5" stroke="#555" stroke-width="2.5"/>
+      <text x="540" y="220" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#333">併網申請</text>
+      <text x="540" y="236" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#666">EVN（越南電力公司）/ MEA / PEA</text>
+
+      <!-- 兩線匯合 COD -->
+      <line x1="180" y1="364" x2="350" y2="395" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr4)"/>
+      <line x1="620" y1="224" x2="630" y2="224" stroke="#555" stroke-width="1.5"/>
+      <line x1="630" y1="224" x2="630" y2="395" stroke="#555" stroke-width="1.5"/>
+      <line x1="630" y1="395" x2="502" y2="395" stroke="#555" stroke-width="1.5" marker-end="url(#arr4)"/>
+
+      <rect x="350" y="375" width="150" height="40" rx="4" fill="#00C853" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="425" y="390" text-anchor="middle" font-family="'Syne',sans-serif" font-size="11" font-weight="700" fill="#fff">COD（商業運轉日）</text>
+      <text x="425" y="407" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#fff">三方共同簽署確認</text>
+    </svg>
+  </div>
+
+  <div class="out-gate fi">
+    <div class="out-box">
+      <div class="box-head" style="color:#2979FF">📦 強制產出</div>
+      <span class="o-tag">📅 工程甘特圖（三方確認）</span>
+      <span class="o-tag">💳 PCM（資金控管機制）付款紀錄</span>
+      <span class="o-tag">📊 包商施工進度週報</span>
+      <span class="o-tag">📓 工程技術部監工日誌</span>
+      <span class="o-tag">✅ 設備驗收報告</span>
+      <span class="o-tag">🚒 消防許可證</span>
+      <span class="o-tag">🔌 併網同意書</span>
+      <span class="o-tag">🎯 COD（商業運轉日）三方簽署文件</span>
+      <span class="o-tag">📐 竣工圖</span>
+    </div>
+    <div class="gate-box">
+      <div class="box-head" style="color:#00C853">🚀 Gate 條件</div>
+      <span class="g-tag">所有許可證齊備</span>
+      <span class="g-tag">設備驗收通過</span>
+      <span class="g-tag">PR（系統效能比）達標</span>
+      <span class="g-tag">併聯完成</span>
+      <span class="g-tag">COD（商業運轉日）三方確認</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAGE 5 ══ -->
+<section class="sec s5-sec" id="s5">
+  <div class="sec-header">
+    <div class="sec-icon">⚙️</div>
+    <div>
+      <div class="sec-label">Stage 5</div>
+      <h2 class="sec-title">維運管理</h2>
+      <p class="sec-desc">COD（商業運轉日）→ PPA（購電協議）合約期滿。適用所有等級。</p>
+    </div>
+  </div>
+
+  <!-- S5 監控分支圖 -->
+  <div class="flow-wrap fi" id="s5-flow">
+    <div class="flow-title">📊 監控異常處理分支圖｜Stage 5-A</div>
+    <svg width="100%" viewBox="0 0 860 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#1A1A1A"/>
+        </marker>
+        <marker id="arr5y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#FF6F00"/>
+        </marker>
+        <marker id="arr5r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#D50000"/>
+        </marker>
+        <marker id="arr5g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#00C853"/>
+        </marker>
+      </defs>
+      <!-- 台灣中控 -->
+      <rect x="20" y="160" width="130" height="60" rx="4" fill="#6200EA" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="85" y="183" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">台灣中控</text>
+      <text x="85" y="199" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#CE93D8">每日監控</text>
+      <text x="85" y="213" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#CE93D8">PR 追蹤</text>
+      <line x1="150" y1="190" x2="178" y2="190" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arr5)"/>
+
+      <!-- 異常判斷菱形 -->
+      <polygon points="220,190 270,155 320,190 270,225" fill="#FFD600" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="270" y="185" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="700" fill="#1A1A1A">異常</text>
+      <text x="270" y="200" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="700" fill="#1A1A1A">判讀</text>
+
+      <!-- 正常 -->
+      <line x1="270" y1="225" x2="270" y2="290" stroke="#00C853" stroke-width="2" marker-end="url(#arr5g)"/>
+      <rect x="200" y="292" width="140" height="48" rx="4" fill="#E8F5E9" stroke="#00C853" stroke-width="2.5"/>
+      <text x="270" y="312" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#1B5E20">✅ 正常</text>
+      <text x="270" y="328" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#2E7D32">繼續監控</text>
+      <text x="282" y="258" font-family="'DM Sans',sans-serif" font-size="10" fill="#00C853" font-weight="700">正常</text>
+
+      <!-- 輕微異常 -->
+      <line x1="320" y1="190" x2="380" y2="190" stroke="#FF6F00" stroke-width="2" marker-end="url(#arr5y)"/>
+      <text x="345" y="183" font-family="'DM Sans',sans-serif" font-size="10" fill="#FF6F00" font-weight="700">輕微</text>
+      <rect x="382" y="155" width="150" height="70" rx="4" fill="#FFF8E1" stroke="#FF6F00" stroke-width="2.5"/>
+      <text x="457" y="180" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#E65100">🟡 輕微異常</text>
+      <text x="457" y="196" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#FF6F00">PR 75–80%</text>
+      <text x="457" y="210" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#FF6F00">連續 1 週</text>
+      <line x1="532" y1="190" x2="570" y2="190" stroke="#FF6F00" stroke-width="2" marker-end="url(#arr5y)"/>
+      <rect x="572" y="155" width="150" height="70" rx="4" fill="#FFF3E0" stroke="#FF6F00" stroke-width="2.5"/>
+      <text x="647" y="180" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#E65100">派工當地</text>
+      <text x="647" y="196" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#E65100">O&M（維護）廠商</text>
+      <text x="647" y="212" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#999">1 個月內改善</text>
+
+      <!-- 重大異常 -->
+      <line x1="320" y1="190" x2="380" y2="100" stroke="#D50000" stroke-width="2" marker-end="url(#arr5r)"/>
+      <text x="345" y="135" font-family="'DM Sans',sans-serif" font-size="10" fill="#D50000" font-weight="700">重大</text>
+      <rect x="382" y="55" width="150" height="80" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="457" y="80" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#B71C1C">🔴 重大異常</text>
+      <text x="457" y="96" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#D50000">PR &lt; 75% / 逆變器</text>
+      <text x="457" y="110" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#D50000">（Inverter）停機</text>
+      <text x="457" y="124" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#D50000">/ 發電量損失</text>
+      <line x1="532" y1="95" x2="570" y2="95" stroke="#D50000" stroke-width="2" marker-end="url(#arr5r)"/>
+
+      <!-- 通報流程 -->
+      <rect x="572" y="55" width="130" height="48" rx="4" fill="#FFEBEE" stroke="#D50000" stroke-width="2.5"/>
+      <text x="637" y="75" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#B71C1C">通報客服課</text>
+      <text x="637" y="91" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#D50000">經營管理部</text>
+      <line x1="702" y1="79" x2="720" y2="79" stroke="#D50000" stroke-width="2" marker-end="url(#arr5r)"/>
+      <rect x="722" y="55" width="118" height="48" rx="4" fill="#D50000" stroke="#1A1A1A" stroke-width="2.5"/>
+      <text x="781" y="75" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="#fff">海外課</text>
+      <text x="781" y="91" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#ffcdd2">專案負責人決策</text>
+
+      <!-- 時限標示 -->
+      <rect x="572" y="270" width="268" height="50" rx="4" fill="#F3E5F5" stroke="#6200EA" stroke-width="2"/>
+      <text x="706" y="291" text-anchor="middle" font-family="'Syne',sans-serif" font-size="10" font-weight="700" fill="#4527A0">⏱ 處理時限</text>
+      <text x="706" y="308" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#4527A0">逆變器停機：24H 查明・48H 修復</text>
+    </svg>
+  </div>
+
+  <!-- S5 其他子模組表格 -->
+  <div class="two-col fi" style="margin-top:24px">
+    <div>
+      <div class="sub-h">5-B 定期巡檢與清洗</div>
+      <table class="sop-table">
+        <thead><tr><th>模式</th><th>頻率</th></tr></thead>
+        <tbody>
+          <tr><td>🔷 密集型</td><td>每季一次，共 4 次／年（巡檢 + 清洗）</td></tr>
+          <tr><td>🔹 標準型</td><td>每半年一次，共 2 次／年（巡檢 + 清洗）</td></tr>
+        </tbody>
+      </table>
+      <div class="sub-h">5-C 電費收款</div>
+      <div class="callout ok">
+        <span class="callout-icon">💰</span>
+        <div>海外課製作月度請款文件 → 業主確認 → 電匯至指定帳戶 → 通知財會部對帳</div>
+      </div>
+    </div>
+    <div>
+      <div class="sub-h">5-D 業主報告</div>
+      <table class="sop-table">
+        <thead><tr><th>類型</th><th>頻率</th><th>內容</th></tr></thead>
+        <tbody>
+          <tr><td>月報</td><td>每月</td><td>發電量、PR（系統效能比）、收益</td></tr>
+          <tr><td>年報</td><td>每年</td><td>全年績效、O&M（營運及維護）摘要、下年度計畫</td></tr>
+        </tbody>
+      </table>
+      <div class="sub-h">5-E 合約管理</div>
+      <table class="sop-table">
+        <thead><tr><th>時間點</th><th>動作</th></tr></thead>
+        <tbody>
+          <tr><td>O&M 到期前 6 個月</td><td>啟動續約或重新競標</td></tr>
+          <tr><td>PPA 到期前 12 個月</td><td>啟動續約談判或設備移轉討論</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 治理機制 ══ -->
+<section class="sec gov-sec" id="gov-a">
+  <div class="sec-header">
+    <div class="sec-icon">🔄</div>
+    <div>
+      <div class="sec-label">專案治理機制</div>
+      <h2 class="sec-title">三個貫穿全程的機制</h2>
+      <p class="sec-desc">從 Stage 1 到 Stage 5 全程適用，解決交接、透明度、變更控制三大痛點。</p>
+    </div>
+  </div>
+
+  <!-- 治理循環圖 -->
+  <div class="flow-wrap fi">
+    <div class="flow-title">📊 治理循環圖｜三機制相互支撐</div>
+    <svg width="100%" viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#FF6F00"/>
+        </marker>
+      </defs>
+      <!-- 中心 -->
+      <ellipse cx="350" cy="130" rx="80" ry="50" fill="#1A1A1A"/>
+      <text x="350" y="124" text-anchor="middle" font-family="'Syne',sans-serif" font-size="12" font-weight="700" fill="#FFD600">專案</text>
+      <text x="350" y="142" text-anchor="middle" font-family="'Syne',sans-serif" font-size="12" font-weight="700" fill="#FFD600">治理</text>
+
+      <!-- A 週報 -->
+      <rect x="40" y="30" width="170" height="80" rx="4" fill="#FFF8E1" stroke="#FF6F00" stroke-width="2.5"/>
+      <text x="125" y="58" text-anchor="middle" font-family="'Syne',sans-serif" font-size="13" font-weight="800" fill="#E65100">A｜週期回報</text>
+      <text x="125" y="76" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#555">每週五提交週報</text>
+      <text x="125" y="93" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#555">讓所有人知道進度</text>
+      <line x1="210" y1="70" x2="268" y2="100" stroke="#FF6F00" stroke-width="2" marker-end="url(#arr6)"/>
+
+      <!-- B 交接包 -->
+      <rect x="40" y="155" width="170" height="80" rx="4" fill="#FFF8E1" stroke="#FF6F00" stroke-width="2.5"/>
+      <text x="125" y="183" text-anchor="middle" font-family="'Syne',sans-serif" font-size="13" font-weight="800" fill="#E65100">B｜交接包</text>
+      <text x="125" y="201" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#555">每 Stage 結束強制填寫</text>
+      <text x="125" y="218" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#555">任何人接手都能上手</text>
+      <line x1="210" y1="195" x2="268" y2="160" stroke="#FF6F00" stroke-width="2" marker-end="url(#arr6)"/>
+
+      <!-- C 變更控制 -->
+      <rect x="490" y="90" width="170" height="80" rx="4" fill="#FFF8E1" stroke="#FF6F00" stroke-width="2.5"/>
+      <text x="575" y="118" text-anchor="middle" font-family="'Syne',sans-serif" font-size="13" font-weight="800" fill="#E65100">C｜變更控制</text>
+      <text x="575" y="136" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#555">條件變動必記錄</text>
+      <text x="575" y="153" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#555">不靠記憶</text>
+      <line x1="430" y1="130" x2="488" y2="130" stroke="#FF6F00" stroke-width="2" marker-end="url(#arr6)"/>
+    </svg>
+  </div>
+
+  <!-- 治理 A 詳細 -->
+  <div class="gov-card fi">
+    <div class="gov-card-head">
+      <span class="gov-badge">治理機制 A</span>
+      <div class="gov-title">週期回報</div>
+    </div>
+    <div class="two-col">
+      <div>
+        <table class="sop-table">
+          <thead><tr><th>類型</th><th>頻率</th><th>對象</th></tr></thead>
+          <tbody>
+            <tr><td>📝 日報</td><td>每天</td><td>僅本人（個人工作紀錄）</td></tr>
+            <tr><td>📊 週報</td><td>每週五</td><td>老闆 + 各 Stage 相關單位</td></tr>
+            <tr><td>📈 月報（S5）</td><td>每月</td><td>老闆 + 客服課 + 財會部</td></tr>
+          </tbody>
+        </table>
+        <div class="sub-h" style="margin-top:16px">各 Stage 週報收件單位</div>
+        <table class="sop-table">
+          <thead><tr><th>Stage</th><th>相關單位</th></tr></thead>
+          <tbody>
+            <tr><td>S1</td><td>財會部</td></tr>
+            <tr><td>S2</td><td>財會部、法務室</td></tr>
+            <tr><td>S3</td><td>財會部、法務室、設計採購部</td></tr>
+            <tr><td>S4</td><td>工程技術部、設計採購部、財會部</td></tr>
+            <tr><td>S5</td><td>經營管理部客服課、財會部</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="sub-h">週報標準格式</div>
+        <div class="report-tpl">
+          <div class="report-head">📊 海外案件週報｜每週五提交</div>
+          <div class="report-row"><span class="r-label">案件名稱</span><span class="r-val">填入案件全名</span></div>
+          <div class="report-row"><span class="r-label">當前 Stage</span><span class="r-val">S1 / S2 / S3 / S4 / S5</span></div>
+          <div class="report-row"><span class="r-label">整體進度</span><span class="r-val">🟢 正常 ／ 🟡 略有延誤 ／ 🔴 需關注</span></div>
+          <div class="report-row"><span class="r-label">本週完成</span><span class="r-val">1. … 2. …</span></div>
+          <div class="report-row"><span class="r-label">本週問題</span><span class="r-val">填入，若無填「無」</span></div>
+          <div class="report-row"><span class="r-label">待決事項</span><span class="r-val">需老闆或其他單位協助的事項</span></div>
+          <div class="report-row"><span class="r-label">下週計畫</span><span class="r-val">1. … 2. …</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 治理 B -->
+  <div class="gov-card fi" id="gov-b">
+    <div class="gov-card-head">
+      <span class="gov-badge">治理機制 B</span>
+      <div class="gov-title">Stage 交接包</div>
+    </div>
+    <div class="callout ok">
+      <span class="callout-icon">✅</span>
+      <div><strong>每個 Stage 結束時強制填寫。</strong>未填寫交接包不得進入下一 Stage。確保任何人接手都能快速上手，不靠記憶。</div>
+    </div>
+    <table class="sop-table" style="margin-top:16px">
+      <thead><tr><th>欄位</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>📦 本 Stage 完成的產出清單</td><td>所有文件名稱與檔案路徑</td></tr>
+        <tr><td>⏸️ 未竟事項</td><td>還沒做完的、還在等待的事項</td></tr>
+        <tr><td>⚠️ 注意事項</td><td>踩過的坑、需要特別留意的</td></tr>
+        <tr><td>▶️ 下一個 Stage 第一步行動</td><td>具體到「誰在什麼時間做什麼事」</td></tr>
+        <tr><td>📅 交接日期</td><td>實際交接完成日期</td></tr>
+        <tr><td>👤 交接人</td><td>填寫交接人姓名</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 治理 C -->
+  <div class="gov-card fi" id="gov-c">
+    <div class="gov-card-head">
+      <span class="gov-badge">治理機制 C</span>
+      <div class="gov-title">變更控制</div>
+    </div>
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div>以下任何情況發生，<strong>必須立即填寫變更記錄，不得依賴記憶。</strong></div>
+    </div>
+    <div style="margin:16px 0">
+      <div class="box-head" style="color:#FF6F00">🔄 觸發條件</div>
+      <span class="o-tag" style="background:#FFF8E1;color:#E65100;border-color:#FF6F00">裝置容量調整</span>
+      <span class="o-tag" style="background:#FFF8E1;color:#E65100;border-color:#FF6F00">電價或 PPA（購電協議）條件重談</span>
+      <span class="o-tag" style="background:#FFF8E1;color:#E65100;border-color:#FF6F00">業主或關係人變更</span>
+      <span class="o-tag" style="background:#FFF8E1;color:#E65100;border-color:#FF6F00">時程延誤超過 2 週</span>
+      <span class="o-tag" style="background:#FFF8E1;color:#E65100;border-color:#FF6F00">預算變動超過 10%</span>
+    </div>
+    <table class="sop-table">
+      <thead><tr><th>記錄欄位</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>📅 變更日期</td><td>發生變更的日期</td></tr>
+        <tr><td>📝 變更內容</td><td>改了什麼（具體描述前後差異）</td></tr>
+        <tr><td>❓ 變更原因</td><td>為什麼要改</td></tr>
+        <tr><td>📊 影響評估</td><td>對 IRR（內部報酬率）、時程、合約的影響</td></tr>
+        <tr><td>✅ 核准人</td><td>老闆或海外課專案負責人</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══ 縮寫對照 ══ -->
+<section class="sec" id="abbr">
+  <div class="sec-header">
+    <div class="sec-icon" style="background:#EDE7F6;border-color:#6200EA;font-size:24px">📖</div>
+    <div>
+      <div class="sec-label" style="color:#6200EA">附錄</div>
+      <h2 class="sec-title">縮寫對照表</h2>
+      <p class="sec-desc">本文件所有英文縮寫之中文全名對照。</p>
+    </div>
+  </div>
+  <div class="abbr-grid fi">
+    <div class="abbr-item"><span class="abbr-code">AEDP</span><span class="abbr-name">替代能源發展計畫（泰國）</span></div>
+    <div class="abbr-item"><span class="abbr-code">BESS</span><span class="abbr-name">電池儲能系統</span></div>
+    <div class="abbr-item"><span class="abbr-code">BOI</span><span class="abbr-name">泰國投資促進委員會</span></div>
+    <div class="abbr-item"><span class="abbr-code">COD</span><span class="abbr-name">商業運轉日</span></div>
+    <div class="abbr-item"><span class="abbr-code">CPPA</span><span class="abbr-name">企業購電協議</span></div>
+    <div class="abbr-item"><span class="abbr-code">DD</span><span class="abbr-name">盡職調查</span></div>
+    <div class="abbr-item"><span class="abbr-code">DPPA</span><span class="abbr-name">直接購電協議</span></div>
+    <div class="abbr-item"><span class="abbr-code">DSCR</span><span class="abbr-name">債務償還覆蓋率</span></div>
+    <div class="abbr-item"><span class="abbr-code">EPC</span><span class="abbr-name">工程採購施工合約</span></div>
+    <div class="abbr-item"><span class="abbr-code">ERC</span><span class="abbr-name">能源監管委員會（泰國）</span></div>
+    <div class="abbr-item"><span class="abbr-code">EVN</span><span class="abbr-name">越南國家電力公司</span></div>
+    <div class="abbr-item"><span class="abbr-code">FDD</span><span class="abbr-name">財務盡職調查</span></div>
+    <div class="abbr-item"><span class="abbr-code">FIT</span><span class="abbr-name">躉購電價制度</span></div>
+    <div class="abbr-item"><span class="abbr-code">Ft</span><span class="abbr-name">燃料調整費（泰國）</span></div>
+    <div class="abbr-item"><span class="abbr-code">IC</span><span class="abbr-name">投資委員會</span></div>
+    <div class="abbr-item"><span class="abbr-code">IPS</span><span class="abbr-name">工業區內部電力銷售（泰國）</span></div>
+    <div class="abbr-item"><span class="abbr-code">IRR</span><span class="abbr-name">內部報酬率</span></div>
+    <div class="abbr-item"><span class="abbr-code">LCD</span><span class="abbr-name">液晶顯示器</span></div>
+    <div class="abbr-item"><span class="abbr-code">LDD</span><span class="abbr-name">法律盡職調查</span></div>
+    <div class="abbr-item"><span class="abbr-code">LOI</span><span class="abbr-name">意向書</span></div>
+    <div class="abbr-item"><span class="abbr-code">LURC</span><span class="abbr-name">土地使用權證書（越南）</span></div>
+    <div class="abbr-item"><span class="abbr-code">MEA</span><span class="abbr-name">都會電力局（泰國，曼谷及周邊）</span></div>
+    <div class="abbr-item"><span class="abbr-code">MOU</span><span class="abbr-name">備忘錄</span></div>
+    <div class="abbr-item"><span class="abbr-code">NBO</span><span class="abbr-name">非約束性出價</span></div>
+    <div class="abbr-item"><span class="abbr-code">O&M</span><span class="abbr-name">營運及維護</span></div>
+    <div class="abbr-item"><span class="abbr-code">OBU</span><span class="abbr-name">境外金融單位</span></div>
+    <div class="abbr-item"><span class="abbr-code">PCM</span><span class="abbr-name">資金控管機制</span></div>
+    <div class="abbr-item"><span class="abbr-code">PCCC</span><span class="abbr-name">越南消防安全規範</span></div>
+    <div class="abbr-item"><span class="abbr-code">PDP</span><span class="abbr-name">電力發展計畫（泰國）</span></div>
+    <div class="abbr-item"><span class="abbr-code">PEA</span><span class="abbr-name">省級電力局（泰國，曼谷以外）</span></div>
+    <div class="abbr-item"><span class="abbr-code">PPA</span><span class="abbr-name">購電協議</span></div>
+    <div class="abbr-item"><span class="abbr-code">PR</span><span class="abbr-name">系統效能比</span></div>
+    <div class="abbr-item"><span class="abbr-code">PV</span><span class="abbr-name">太陽光電</span></div>
+    <div class="abbr-item"><span class="abbr-code">PVsyst</span><span class="abbr-name">太陽光電模擬軟體</span></div>
+    <div class="abbr-item"><span class="abbr-code">SHA</span><span class="abbr-name">股東協議</span></div>
+    <div class="abbr-item"><span class="abbr-code">SPA</span><span class="abbr-name">股份買賣協議</span></div>
+    <div class="abbr-item"><span class="abbr-code">SPE</span><span class="abbr-name">日益智慧能源股份有限公司</span></div>
+    <div class="abbr-item"><span class="abbr-code">SPP</span><span class="abbr-name">小型電力生產商（泰國，10-90 MW）</span></div>
+    <div class="abbr-item"><span class="abbr-code">SPV</span><span class="abbr-name">特殊目的公司</span></div>
+    <div class="abbr-item"><span class="abbr-code">TPPA</span><span class="abbr-name">三方購電協議</span></div>
+    <div class="abbr-item"><span class="abbr-code">VPPA</span><span class="abbr-name">虛擬購電協議</span></div>
+    <div class="abbr-item"><span class="abbr-code">VSPP</span><span class="abbr-name">微型電力生產商（泰國，10 MW 以下）</span></div>
+  </div>
+</section>
+
+<footer class="doc-footer">
+  <div>SPE 日益智慧能源股份有限公司｜海外課｜機密文件，僅供內部使用</div>
+  <div>Version 2.0｜2026 年 5 月</div>
+</footer>
+
+</main>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+},{threshold:0.08});
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+const secs = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-a');
+const scrollObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      navAs.forEach(a => {
+        a.classList.remove('active');
+        if(a.getAttribute('href')==='#'+e.target.id) a.classList.add('active');
+      });
+    }
+  });
+},{threshold:0.25});
+secs.forEach(s => scrollObs.observe(s));
+</script>
+</body>
+</html>
